@@ -7,23 +7,6 @@ export default defineConfig({
     configProvider: {},
     // themes
     dark: false,
-    // compact: true,
-    // // babel-plugin-import
-    // import: true,
-    // // less or css, default less
-    // style: 'less',
-    // // shortcut of `configProvider.theme`
-    // // use to configure theme token, antd v5 only
-    // theme: {},
-    // // antd <App /> valid for version 5.1.0 or higher, default: undefined
-    // appConfig: {},
-    // // Transform DayJS to MomentJS
-    // momentPicker: true,
-    // // Add StyleProvider for legacy browsers
-    // styleProvider: {
-    //   hashPriority: 'high',
-    //   legacyTransformer: true,
-    // },
   },
 
   //权限  access 插件依赖 initial State 所以需要同时开启
@@ -47,6 +30,7 @@ export default defineConfig({
   },
   layout: {
     title: '肖振洋',
+    // 默认布局调整
   },
   routes: [
     {
