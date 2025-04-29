@@ -1,6 +1,8 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
+  vite: {},
+  
   // antd配置
   antd: {
     // configProvider
@@ -26,7 +28,7 @@ export default defineConfig({
 
   // 请求过来的数据字段
   request: {
-    // dataField: '',
+    dataField: '',
   },
   layout: {
     title: '肖振洋',
@@ -47,8 +49,17 @@ export default defineConfig({
       component: '@/pages/Table',
     },
     {
+      name: '登录页',
       path: '/authorization',
       component: '@/pages/Authorization/index',
+      layout: false,
+      hiddenMenu: true,
+    },
+    {
+      name: '用户认证',
+      path: '/auth',
+      component: '@/pages/Auth/index',
+      hideInMenu: true,
       layout: false,
     },
   ],

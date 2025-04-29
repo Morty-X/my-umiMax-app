@@ -1,7 +1,6 @@
 import { persistor, store } from '@/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-
 // 运行时配置
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
@@ -29,3 +28,5 @@ export function rootContainer(container: JSX.Element) {
     </>
   );
 }
+
+/* -------------------------------------------------------------------------- */

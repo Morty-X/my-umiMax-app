@@ -1,78 +1,61 @@
+import { getVerifyCode, loginService } from '@/services';
 import {
   LockOutlined,
   UserOutlined,
   VerifiedOutlined,
 } from '@ant-design/icons';
-import { history, request, useRequest } from '@umijs/max';
-import { Button, Col, Form, Input, Row } from 'antd';
+import { useRequest } from '@umijs/max';
+import { Button, Col, Form, Input, message, Row } from 'antd';
 import { useEffect, type FC } from 'react';
 
-export interface qrDataResType {
-  code: number;
-  msg: string;
-  data: Data;
-}
-
-export interface Data {
-  svg: string;
-  no: string;
-}
-/* -------------------------------------------------------------------------- */
-interface loginResType {
-  code: number;
-  msg: string;
-  data: null;
-}
-/* -------------------------------------------------------------------------- */
-/** 获取验证码请求 */
-const generateQRCode = () =>
-  request<qrDataResType>('/api/admin/verifycode', {});
-
-/** 登录请求 */
-const loginApi = (login_params: Record<string, any>) =>
-  request<loginResType>('/api/admin/login', {
-    method: 'POST',
-    data: login_params,
+// UI函数会因为状态的改变而重新渲染
+const Auth: FC = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+  /* -------------------------------------------------------------------------- */
+  const {
+    data: verifyCodeData,
+    loading: verifyLoading,
+    error: verifyError,
+    refresh: refreshVerifyCode,
+  } = useRequest(getVerifyCode, {
+    onSuccess(data) {
+      console.log(data);
+    },
+    onError() {
+      // 报错弹框
+      messageApi.open({
+        type: 'success',
+        content: '获取验证码成功',
+      });
+    },
   });
 
-const Login: FC = () => {
+  /* -------------------------------------------------------------------------- */
+  useEffect(() => {
+    console.log('verifyCodeData:', verifyCodeData);
+  }, [verifyCodeData]);
+
+  /* -------------------------------------------------------------------------- */
+  const {
+    data: loginData,
+    loading: loginLoading,
+    error: loginError,
+  } = useRequest(loginService, { manual: true });
+  /* -------------------------------------------------------------------------- */
   const onFinish = (values: any) => {
     console.log('Success:', values);
-    loginApi({ ...values, no: qrCodeData?.data.no })
-      .then((result) => {
-        console.log(result);
-        // 登录成功
-        if (result.code === 200) {
-          // 跳转页面
-          history.push('/');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (verifyCodeData?.no) {
+      loginService({ ...values, no: verifyCodeData?.no });
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-
-  // 定义一个用于生成验证码的 useRequest
-  const { run: refreshQRCodeRun, data: qrCodeData } = useRequest(
-    generateQRCode,
-    { manual: true },
-  );
-
-  useEffect(() => {
-    refreshQRCodeRun();
-  }, []);
-
-  const refreshQRCode = () => {
-    // 刷新二维码 的请求
-    refreshQRCodeRun();
-  };
-
+  /* -------------------------------------------------------------------------- */
   return (
     <>
+      {contextHolder}
       <div className="flex flex-col items-center ">
         <h1 className="my-[30px]  flex  select-none">
           <svg
@@ -143,10 +126,9 @@ const Login: FC = () => {
 
                   <Col span={6}>
                     <div
-                      onClick={refreshQRCode}
                       className=" w-[80px] h-[50px] flex-1 cursor-pointer"
                       dangerouslySetInnerHTML={{
-                        __html: qrCodeData?.data.svg as string,
+                        __html: verifyCodeData?.data.svg as string,
                       }}
                     ></div>
                   </Col>
@@ -177,4 +159,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default Auth;

@@ -1,8 +1,7 @@
-import { UserAction } from "./actions";
-import { UserActionTypes } from "./types";
-import { UserInfoData } from "../../../api";
+import { UserAction } from './actions';
+import { UserActionTypes } from './types';
 
-const defaultState: UserInfoData = {} as UserInfoData;
+const defaultState: API.UserData = {} as API.UserData;
 
 export const userReducer = (preState = defaultState, action: UserAction) => {
   switch (action.type) {
