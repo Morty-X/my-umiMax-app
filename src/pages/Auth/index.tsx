@@ -1,57 +1,89 @@
 import { getVerifyCode, loginService } from '@/services';
+import { useAppDispatch } from '@/store';
+import { fetchUserInfo } from '@/store/modules/user/actions';
 import {
   LockOutlined,
   UserOutlined,
   VerifiedOutlined,
 } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
+import { Navigate, useRequest } from '@umijs/max';
 import { Button, Col, Form, Input, message, Row } from 'antd';
-import { useEffect, type FC } from 'react';
+import { useCallback, type FC } from 'react';
 
 // UI函数会因为状态的改变而重新渲染
 const Auth: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
+
+  const dispatch = useAppDispatch();
   /* -------------------------------------------------------------------------- */
   const {
     data: verifyCodeData,
     loading: verifyLoading,
     error: verifyError,
-    refresh: refreshVerifyCode,
+    refresh: _refreshVerifyCode,
   } = useRequest(getVerifyCode, {
-    onSuccess(data) {
-      console.log(data);
-    },
+    onSuccess() {},
     onError() {
       // 报错弹框
       messageApi.open({
-        type: 'success',
-        content: '获取验证码成功',
+        type: 'error',
+        content: '获取验证码失败',
       });
     },
   });
 
-  /* -------------------------------------------------------------------------- */
-  useEffect(() => {
-    console.log('verifyCodeData:', verifyCodeData);
-  }, [verifyCodeData]);
+  /** 刷新验证码 */
+  /** form 表单实例 formInstance */
+  const [formInstance] = Form.useForm();
+
+  /** 刷新验证码 */
+  const refreshVerifyCode = useCallback(() => {
+    // 清空验证码输入框
+    formInstance.resetFields(['verifyCode']);
+    // 重新发送验证码请求
+    _refreshVerifyCode();
+  }, [formInstance, _refreshVerifyCode]);
 
   /* -------------------------------------------------------------------------- */
   const {
     data: loginData,
     loading: loginLoading,
     error: loginError,
-  } = useRequest(loginService, { manual: true });
+    run: userLogin,
+  } = useRequest(loginService, {
+    manual: true,
+    onSuccess({ code, msg }) {
+      if (code !== 200) {
+        refreshVerifyCode();
+        return messageApi.open({
+          type: 'warning',
+          content: msg,
+        });
+      }
+      messageApi.open({
+        type: 'success',
+        content: msg,
+      });
+      // 重置表单
+      formInstance.resetFields();
+      dispatch(fetchUserInfo());
+    },
+  });
   /* -------------------------------------------------------------------------- */
+
+  // 登录成功后的页面跳转
+  if (loginData?.code === 200) {
+    return <Navigate to="/"></Navigate>;
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /** 点击表单登录按钮的回调函数 */
   const onFinish = (values: any) => {
-    console.log('Success:', values);
-    if (verifyCodeData?.no) {
-      loginService({ ...values, no: verifyCodeData?.no });
+    if (verifyCodeData?.data.no) {
+      userLogin({ ...values, no: verifyCodeData.data.no });
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
   /* -------------------------------------------------------------------------- */
   return (
     <>
@@ -85,12 +117,12 @@ const Auth: FC = () => {
           <div className="flex flex-col items-center justify-center flex-1 w-full h-full">
             <h1 className="select-none ">账号密码登录</h1>
             <Form
+              form={formInstance}
               name="login_form"
               wrapperCol={{ span: 24 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}
               size="large"
-              onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
               <Form.Item
@@ -126,6 +158,7 @@ const Auth: FC = () => {
 
                   <Col span={6}>
                     <div
+                      onClick={refreshVerifyCode}
                       className=" w-[80px] h-[50px] flex-1 cursor-pointer"
                       dangerouslySetInnerHTML={{
                         __html: verifyCodeData?.data.svg as string,
@@ -137,6 +170,7 @@ const Auth: FC = () => {
 
               <Form.Item wrapperCol={{ span: 24 }}>
                 <Button
+                  loading={loginLoading}
                   type="primary"
                   className=" bg-[#955ce6]"
                   block

@@ -39,7 +39,7 @@ export default defineConfig({
       path: '/',
       name: '首页',
       component: '@/pages/Home',
-
+      
       // 配置子路由
       routes: [],
     },

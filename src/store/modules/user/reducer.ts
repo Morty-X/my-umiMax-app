@@ -1,7 +1,7 @@
 import { UserAction } from './actions';
 import { UserActionTypes } from './types';
 
-const defaultState: API.UserData = {} as API.UserData;
+const defaultState: API.UserProfile = {} as API.UserProfile;
 
 export const userReducer = (preState = defaultState, action: UserAction) => {
   switch (action.type) {
