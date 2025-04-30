@@ -1,9 +1,9 @@
 import { persistor, store } from '@/store';
 import { BulbOutlined, LogoutOutlined } from '@ant-design/icons';
-import { message, type MenuProps } from 'antd';
-
+import { type MenuProps } from 'antd';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import Profile from './components/Profile/Profile';
 // 运行时配置
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
@@ -36,20 +36,17 @@ export const layout = () => {
       label: '切换主题',
     },
   ];
-  const DropdownOnClick: MenuProps['onClick'] = ({ key }) => {
-    message.info(`Click on item ${key}`);
-  };
+
   return {
-    title: 'Serati Ma',
     layout: 'mix',
     contentWidth: 'Fluid',
-    fixedHeader: true,
     primaryColor: '#1890ff',
+    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
     // splitMenus: true,
     // 展示 用户名 头像 退出登录相关组件
     rightRender: () => (
       <>
-        <div>你好</div>
+        <Profile />
       </>
     ),
     // avatarProps: {
