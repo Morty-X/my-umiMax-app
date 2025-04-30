@@ -5,6 +5,7 @@ import {
   type Action,
   type Middleware,
 } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import { persistStore } from 'redux-persist';
 import { thunk, ThunkAction, type ThunkDispatch } from 'redux-thunk';
@@ -24,7 +25,11 @@ if (isDev) {
 
 const enhancer = applyMiddleware(...middleware);
 
-export const store = createStore(rootReducer, undefined, enhancer);
+export const store = createStore(
+  rootReducer,
+  undefined,
+  composeWithDevTools(enhancer),
+);
 
 export const persistor = persistStore(store);
 

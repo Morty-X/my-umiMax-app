@@ -14,12 +14,15 @@ importers:
       '@ant-design/pro-components':
         specifier: ^2.4.4
         version: 2.8.7(antd@5.24.8(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(rc-field-form@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/node':
+        specifier: ^22.15.3
+        version: 22.15.3
       '@types/redux-logger':
         specifier: ^3.0.13
         version: 3.0.13
       '@umijs/max':
         specifier: ^4.4.10
-        version: 4.4.10(@babel/core@7.26.10)(@types/node@22.15.2)(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(dva@2.5.0-beta.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(lightningcss@1.22.1)(prettier@2.8.8)(rc-field-form@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
+        version: 4.4.10(@babel/core@7.26.10)(@types/node@22.15.3)(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(dva@2.5.0-beta.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(lightningcss@1.22.1)(prettier@2.8.8)(rc-field-form@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
       antd:
         specifier: ^5.4.0
         version: 5.24.8(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -32,6 +35,9 @@ importers:
       redux:
         specifier: ^5.0.1
         version: 5.0.1
+      redux-devtools-extension:
+        specifier: ^2.13.9
+        version: 2.13.9(redux@5.0.1)
       redux-logger:
         specifier: ^3.0.6
         version: 3.0.6
@@ -1341,6 +1347,9 @@ packages:
 
   '@types/node@22.15.2':
     resolution: {integrity: sha512-uKXqKN9beGoMdBfcaTY1ecwz6ctxuJAcUlwE55938g0ZJ8lRxwAZqRz2AJ4pzpt5dHdTPMB863UZ0ESiFUcP7A==}
+
+  '@types/node@22.15.3':
+    resolution: {integrity: sha512-lX7HFZeHf4QG/J7tBZqrCAXwz9J5RD56Y6MpP0eJkka8p+K0RY/yBTW7CYFJ4VGCclxqOLKmiGP5juQc6MKgcw==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -5318,6 +5327,12 @@ packages:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
 
+  redux-devtools-extension@2.13.9:
+    resolution: {integrity: sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==}
+    deprecated: Package moved to @redux-devtools/extension.
+    peerDependencies:
+      redux: ^3.1.0 || ^4.0.0
+
   redux-logger@3.0.6:
     resolution: {integrity: sha512-JoCIok7bg/XpqA1JqCqXFypuqBbQzGQySrhFzewB7ThcnysTO30l4VCst86AuB9T9tuT03MAA56Jw2PNhRSNCg==}
 
@@ -7472,7 +7487,7 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
       '@types/yargs': 16.0.9
       chalk: 4.1.2
 
@@ -7481,7 +7496,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -7853,7 +7868,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
 
   '@types/hapi__joi@17.1.9': {}
 
@@ -7894,6 +7909,10 @@ snapshots:
   '@types/minimist@1.2.5': {}
 
   '@types/node@22.15.2':
+    dependencies:
+      undici-types: 6.21.0
+
+  '@types/node@22.15.3':
     dependencies:
       undici-types: 6.21.0
 
@@ -8103,18 +8122,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@umijs/bundler-vite@4.4.10(@types/node@22.15.2)(lightningcss@1.22.1)(postcss@8.5.3)(rollup@3.29.5)(terser@5.39.0)':
+  '@umijs/bundler-vite@4.4.10(@types/node@22.15.3)(lightningcss@1.22.1)(postcss@8.5.3)(rollup@3.29.5)(terser@5.39.0)':
     dependencies:
       '@svgr/core': 6.5.1
       '@umijs/bundler-utils': 4.4.10
       '@umijs/utils': 4.4.10
-      '@vitejs/plugin-react': 4.0.0(vite@4.5.2(@types/node@22.15.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0))
+      '@vitejs/plugin-react': 4.0.0(vite@4.5.2(@types/node@22.15.3)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0))
       core-js: 3.34.0
       less: 4.1.3
       postcss-preset-env: 7.5.0(postcss@8.5.3)
       rollup-plugin-visualizer: 5.9.0(rollup@3.29.5)
       systemjs: 6.15.1
-      vite: 4.5.2(@types/node@22.15.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0)
+      vite: 4.5.2(@types/node@22.15.3)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0)
     transitivePeerDependencies:
       - '@types/node'
       - lightningcss
@@ -8304,14 +8323,14 @@ snapshots:
       - typescript
       - webpack
 
-  '@umijs/max@4.4.10(@babel/core@7.26.10)(@types/node@22.15.2)(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(dva@2.5.0-beta.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(lightningcss@1.22.1)(prettier@2.8.8)(rc-field-form@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)':
+  '@umijs/max@4.4.10(@babel/core@7.26.10)(@types/node@22.15.3)(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(dva@2.5.0-beta.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(lightningcss@1.22.1)(prettier@2.8.8)(rc-field-form@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)':
     dependencies:
       '@umijs/lint': 4.4.10(eslint@8.35.0)(stylelint@14.8.2)(typescript@5.8.3)
       '@umijs/plugins': 4.4.10(@babel/core@7.26.10)(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(antd@4.24.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(dva@2.5.0-beta.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(rc-field-form@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       antd: 4.24.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       eslint: 8.35.0
       stylelint: 14.8.2
-      umi: 4.4.10(@babel/core@7.26.10)(@types/node@22.15.2)(@types/react@18.3.20)(eslint@8.35.0)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.8.2)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
+      umi: 4.4.10(@babel/core@7.26.10)(@types/node@22.15.3)(@types/react@18.3.20)(eslint@8.35.0)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.8.2)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
     transitivePeerDependencies:
       - '@babel/core'
       - '@rspack/core'
@@ -8410,7 +8429,7 @@ snapshots:
       - react-native
       - supports-color
 
-  '@umijs/preset-umi@4.4.10(@types/node@22.15.2)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)':
+  '@umijs/preset-umi@4.4.10(@types/node@22.15.3)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)':
     dependencies:
       '@iconify/utils': 2.1.1
       '@svgr/core': 6.5.1
@@ -8419,7 +8438,7 @@ snapshots:
       '@umijs/bundler-esbuild': 4.4.10
       '@umijs/bundler-mako': 0.11.10(postcss@8.5.3)(typescript@5.8.3)(webpack@5.99.7)
       '@umijs/bundler-utils': 4.4.10
-      '@umijs/bundler-vite': 4.4.10(@types/node@22.15.2)(lightningcss@1.22.1)(postcss@8.5.3)(rollup@3.29.5)(terser@5.39.0)
+      '@umijs/bundler-vite': 4.4.10(@types/node@22.15.3)(lightningcss@1.22.1)(postcss@8.5.3)(rollup@3.29.5)(terser@5.39.0)
       '@umijs/bundler-webpack': 4.4.10(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
       '@umijs/core': 4.4.10
       '@umijs/did-you-know': 1.0.3
@@ -8543,13 +8562,13 @@ snapshots:
 
   '@umijs/zod2ts@4.4.10': {}
 
-  '@vitejs/plugin-react@4.0.0(vite@4.5.2(@types/node@22.15.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0))':
+  '@vitejs/plugin-react@4.0.0(vite@4.5.2(@types/node@22.15.3)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.10)
       react-refresh: 0.14.2
-      vite: 4.5.2(@types/node@22.15.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0)
+      vite: 4.5.2(@types/node@22.15.3)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -10921,7 +10940,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -10938,7 +10957,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -10952,14 +10971,14 @@ snapshots:
 
   jest-worker@29.4.3:
     dependencies:
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -12899,6 +12918,10 @@ snapshots:
       indent-string: 4.0.0
       strip-indent: 3.0.0
 
+  redux-devtools-extension@2.13.9(redux@5.0.1):
+    dependencies:
+      redux: 5.0.1
+
   redux-logger@3.0.6:
     dependencies:
       deep-diff: 0.3.8
@@ -13747,14 +13770,14 @@ snapshots:
 
   typescript@5.8.3: {}
 
-  umi@4.4.10(@babel/core@7.26.10)(@types/node@22.15.2)(@types/react@18.3.20)(eslint@8.35.0)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.8.2)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7):
+  umi@4.4.10(@babel/core@7.26.10)(@types/node@22.15.3)(@types/react@18.3.20)(eslint@8.35.0)(lightningcss@1.22.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.8.2)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7):
     dependencies:
       '@babel/runtime': 7.23.6
       '@umijs/bundler-utils': 4.4.10
       '@umijs/bundler-webpack': 4.4.10(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
       '@umijs/core': 4.4.10
       '@umijs/lint': 4.4.10(eslint@8.35.0)(stylelint@14.8.2)(typescript@5.8.3)
-      '@umijs/preset-umi': 4.4.10(@types/node@22.15.2)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
+      '@umijs/preset-umi': 4.4.10(@types/node@22.15.3)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.39.0)(type-fest@1.4.0)(typescript@5.8.3)(webpack@5.99.7)
       '@umijs/renderer-react': 4.4.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@umijs/server': 4.4.10
       '@umijs/test': 4.4.10(@babel/core@7.26.10)
@@ -13889,13 +13912,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@4.5.2(@types/node@22.15.2)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0):
+  vite@4.5.2(@types/node@22.15.3)(less@4.1.3)(lightningcss@1.22.1)(terser@5.39.0):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.5.3
       rollup: 3.29.5
     optionalDependencies:
-      '@types/node': 22.15.2
+      '@types/node': 22.15.3
       fsevents: 2.3.3
       less: 4.1.3
       lightningcss: 1.22.1

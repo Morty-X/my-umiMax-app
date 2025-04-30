@@ -1,8 +1,7 @@
 import { defineConfig } from '@umijs/max';
-
 export default defineConfig({
   vite: {},
-  
+
   // antd配置
   antd: {
     // configProvider
@@ -32,22 +31,33 @@ export default defineConfig({
   },
   layout: {
     title: '肖振洋',
-    // 默认布局调整
+    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
+    menu: {
+      locale: false,
+    },
   },
   routes: [
     {
       path: '/',
       name: '首页',
       component: '@/pages/Home',
-      
+      hideInBreadcrumb: false,
       // 配置子路由
       routes: [],
+    },
+    {
+      name: '客户列表',
+      path: '/clientList',
+      component: '@/pages/ClientList',
+      hideInBreadcrumb: false,
     },
     {
       name: 'CRUD 示例',
       path: '/table',
       component: '@/pages/Table',
+      hideInBreadcrumb: false,
     },
+
     {
       name: '登录页',
       path: '/authorization',
