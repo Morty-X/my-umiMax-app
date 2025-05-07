@@ -19,6 +19,8 @@
     "@types/store": "^2.0.5",
     "@umijs/max": "^4.4.10",
     "antd": "^5.4.0",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
     "immer": "^10.1.1",
     "react-redux": "^9.2.0",
     "react-transition-group": "^4.4.5",
@@ -27,7 +29,8 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^3.1.0",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "timezone-support": "^3.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.33",
