@@ -47,12 +47,13 @@ export default defineConfig({
       name: '用户管理',
       path: '/user',
       icon: 'ContactsTwoTone',
+      component: '@/pages/User/ProxyOfList',
       // 配置子路由
       routes: [
         {
           name: '代理列表',
           path: '/user/agents',
-          component: '@/pages/Home',
+          component: '@/pages/User/ProxyOfList',
         },
         {
           name: '管理员列表',
