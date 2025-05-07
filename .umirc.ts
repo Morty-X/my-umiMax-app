@@ -239,13 +239,19 @@ export default defineConfig({
       /** 在面包屑中隐藏 */
       hideInBreadcrumb: false,
     },
+    {
+      name: '新增代理',
+      path: '/addProxy',
+      component: '@/pages/AddProxy',
+      hideInMenu: true,
+    },
 
     {
       name: '登录页',
       path: '/authorization',
       component: '@/pages/Authorization/index',
       layout: false,
-      hiddenMenu: true,
+      hideInMenu: true,
     },
     {
       name: '登录页',

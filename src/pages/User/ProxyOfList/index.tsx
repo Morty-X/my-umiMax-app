@@ -1,7 +1,8 @@
 import { searchProxyOfList } from '@/services/user/ProxyOfList/api';
 import { formatDateTime } from '@/utils/format';
+import { ReloadOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { Link, useRequest } from '@umijs/max';
 import type { TableProps } from 'antd';
 import {
   Button,
@@ -28,10 +29,22 @@ const ProxyOfList = () => {
     console.log('Search params:', values);
     // 这里添加搜索逻辑
 
-    searchProxyOfList({ ...values, current: 1, pageSize: 10 })
+    searchProxyOfList({
+      ...values,
+      current: paginationConfig.current,
+      pageSize: paginationConfig.pageSize,
+    })
       .then((result) => {
+        console.log(result);
+        const { current, pageSize, count, totalPages } = result.data;
         message.success(result.msg);
         setData(result.data.data);
+        setPaginationConfig({
+          current,
+          pageSize,
+          count,
+          totalPages,
+        });
       })
       .catch((err) => {
         message.error(err);
@@ -39,12 +52,10 @@ const ProxyOfList = () => {
   };
 
   /** 重置表单 */
+  const [isResetForm, setIsResetForm] = useState(false);
   const onReset = () => {
     form.resetFields();
-    setPaginationConfig({
-      current: 1,
-      pageSize: 10,
-    });
+    setIsResetForm((state) => !state);
   };
 
   /* -------------------------------------------------------------------------- */
@@ -82,23 +93,33 @@ const ProxyOfList = () => {
       pageSize: 10,
     });
 
+  /** 刷新表格数据 */
+  const [isRefreshTable, setIsRefreshTable] = useState(false);
+
   useEffect(() => {
-    run({ ...paginationConfig })
+    run({
+      current: paginationConfig.current,
+      pageSize: paginationConfig.pageSize,
+    })
       .then((result) => {
         const { count, current, pageSize, totalPages } = result.data;
-        console.log(result.data.data);
-        setData(result.data.data);
         setPaginationConfig({
           count,
           current,
           pageSize,
           totalPages,
         });
+        setData(result.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        message.error(err);
       });
-  }, [paginationConfig.current, paginationConfig.pageSize]);
+  }, [
+    paginationConfig.current,
+    paginationConfig.pageSize,
+    isRefreshTable,
+    isResetForm,
+  ]);
 
   /** 表格列配置 */
   const columns: TableProps<ProxyOfListAPI.Datum>['columns'] = [
@@ -174,21 +195,6 @@ const ProxyOfList = () => {
 
   const [data, setData] = useState<ProxyOfListAPI.Datum[]>([]);
 
-  /** 表格数据 */
-  // const data: ProxyOfListAPI.Datum[] = [
-  //   {
-  //     agentNo: 'u6i-uaA9gcL6RzCe',
-  //     agentAccount: "t'r特瑞特",
-  //     mobileNumber: '13993658456',
-  //     realName: '安抚哈哈',
-  //     status: 0,
-  //     createTime: '2023-05-31T08:33:33.399Z',
-  //     updateTime: '2025-05-07T06:32:51.000Z',
-  //     defaultPwd: '410066',
-  //     updatedBy: 'oT4j49UfRBo5fAWN',
-  //   },
-  // ];
-
   return (
     <>
       <PageContainer
@@ -260,7 +266,24 @@ const ProxyOfList = () => {
             </Row>
           </Form.Item>
         </Form>
-        <Divider style={{ borderColor: '#393939' }}></Divider>
+        <Divider
+          style={{ borderColor: '#393939', marginBlockEnd: 0 }}
+        ></Divider>
+
+        <div className="flex h-[70px] items-center border justify-between w-full ">
+          <Link to={'/addProxy'}>
+            <Button size="large" type="primary">
+              添加代理
+            </Button>
+          </Link>
+          <div
+            onClick={() => setIsRefreshTable((prev) => !prev)}
+            className="w-[40px] flex h-[40px] border rounded-md  cursor-pointer justify-center items-center border-[#000] "
+          >
+            <ReloadOutlined className=" text-[30px]" />
+          </div>
+        </div>
+
         {/* 表格 */}
         <Table<ProxyOfListAPI.Datum>
           columns={columns}
