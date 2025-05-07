@@ -16,6 +16,7 @@
     "@types/node": "^22.15.3",
     "@types/react-transition-group": "^4.4.12",
     "@types/redux-logger": "^3.0.13",
+    "@types/store": "^2.0.5",
     "@umijs/max": "^4.4.10",
     "antd": "^5.4.0",
     "immer": "^10.1.1",
@@ -25,7 +26,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "store": "^2.0.12"
   },
   "devDependencies": {
     "@types/react": "^18.0.33",

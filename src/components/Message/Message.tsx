@@ -12,7 +12,7 @@ export interface MessageProps {
 }
 export const Message: FC<MessageProps> = ({ type, content }) => {
   return (
-    <div className=" w-[200px] h-[60px] flex items-center text-[12px] justify-center gap-2 border-2 border-[#888] rounded-md">
+    <div className=" shadow-md w-[200px] h-[60px] flex items-center text-[12px] justify-center gap-2 border-2 border-[#888] rounded-md">
       {type === 'success' && <CheckCircleTwoTone twoToneColor="#49e9a6" />}
       {type === 'warning' && (
         <ExclamationCircleTwoTone twoToneColor="#e4b781" />

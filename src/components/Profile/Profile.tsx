@@ -1,65 +1,83 @@
-import { DownOutlined, SmileOutlined } from '@ant-design/icons';
+import { LockTwoTone, SettingTwoTone, StopTwoTone } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Dropdown, message, Space } from 'antd';
+import { Avatar, Dropdown } from 'antd';
 import React from 'react';
+
+import { Link } from '@umijs/max';
+import store from 'store';
+import type { IUserInfo } from './types';
+
+/** 本场存储的数据 */
+const userData = store.get('persist:user');
+
+/** 与用户相关的数据 */
+const userInfo: IUserInfo = JSON.parse(userData.user);
+
+console.log(userInfo);
+
+/** 下拉选项点击事件 */
+const onClick: MenuProps['onClick'] = ({ key }) => {};
 
 const items: MenuProps['items'] = [
   {
+    key: '0',
+    label: (
+      <div className="flex flex-col justify-center px-3 py-2 text-white bg-gradient-to-r from-[#677bd1] to-[#e6a0fe]">
+        <h1 className=" text-[20px] ">
+          {userInfo.realName} {userInfo.mobileNumber}
+        </h1>
+        <p>NO:{userInfo.adminNo}</p>
+      </div>
+    ),
+    style: { padding: 0 },
+  },
+  {
     key: '1',
     label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.antgroup.com"
-      >
-        1st menu item
-      </a>
+      <Link to={'/personal/update'}>
+        <div>
+          <SettingTwoTone /> <span className="ml-[4px]">个人设置</span>
+        </div>
+      </Link>
     ),
   },
   {
     key: '2',
     label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.aliyun.com"
-      >
-        2nd menu item (disabled)
-      </a>
+      <Link to={'/personal/updatePwd'}>
+        <div>
+          <LockTwoTone /> <span className="ml-[4px]">修改密码</span>
+        </div>
+      </Link>
     ),
-    icon: <SmileOutlined />,
-    disabled: true,
+  },
+  {
+    type: 'divider',
   },
   {
     key: '3',
     label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com"
-      >
-        3rd menu item (disabled)
-      </a>
+      <Link to={'/auth'}>
+        <div>
+          <StopTwoTone /> <span className="ml-[4px]">退出登录</span>
+        </div>
+      </Link>
     ),
-    disabled: true,
-  },
-  {
-    key: '4',
-    danger: true,
-    label: 'a danger item',
   },
 ];
-const DropdownOnClick: MenuProps['onClick'] = ({ key }) => {
-  message.info(`Click on item ${key}`);
-};
+
 const Profile: React.FC = () => (
-  <Dropdown menu={{ items, onClick: DropdownOnClick }}>
-    <a onClick={(e) => e.preventDefault()}>
-      <Space>
-        Hover me
-        <DownOutlined />
-      </Space>
-    </a>
+  <Dropdown
+    menu={{ items, onClick, style: { padding: 0 } }}
+    placement="bottomLeft"
+    arrow
+  >
+    <Avatar
+      src={
+        <img src={userInfo.avatarUrl || '/src/assets/images/tom01.png'}></img>
+      }
+      className="cursor-pointer "
+    />
   </Dropdown>
 );
 
