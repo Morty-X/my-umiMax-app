@@ -269,7 +269,7 @@ const ProxyOfList = () => {
         <Divider
           style={{ borderColor: '#393939', marginBlockEnd: 0 }}
         ></Divider>
-  
+
         <div className="flex h-[70px] items-center border justify-between w-full ">
           <Link to={'/addProxy'}>
             <Button size="large" type="primary">
