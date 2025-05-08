@@ -1,34 +1,118 @@
-import { searchProxyOfList } from '@/services/user/ProxyOfList/api';
+import {
+  resetPwdProxyOfList,
+  searchProxyOfList,
+  updateProxyOfListUser,
+} from '@/services/user/ProxyOfList/api';
 import { formatDateTime } from '@/utils/format';
-import { ReloadOutlined } from '@ant-design/icons';
+import { ReloadOutlined, UserOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { Link, useRequest } from '@umijs/max';
-import type { TableProps } from 'antd';
+import type { MenuProps, TableProps } from 'antd';
 import {
   Button,
   Col,
   Divider,
+  Dropdown,
   Form,
   Input,
   message,
   Row,
   Select,
   Table,
+  Tooltip,
 } from 'antd';
 import { clsx } from 'clsx';
+import qs from 'qs';
 import { useEffect, useState } from 'react';
-
 type TableRowSelection<T extends object = object> =
   TableProps<T>['rowSelection'];
 
 const ProxyOfList = () => {
+  /** 修改用户状态 */
+  const changeStatus = (params: { status: number; agentNo: string }) => {
+    // 使用布尔取反再转数字，实现简洁的状态翻转
+    params.status = Number(!params.status);
+    // 修改管理员用户数据，还需要发送请求
+    updateProxyOfListUser(params)
+      .then((result) => {
+        message.success(result.msg);
+        /** 刷新表格 */
+        setIsRefreshTable((state) => !state);
+      })
+      .catch((err) => {
+        message.error(err);
+      });
+  };
+
+  /** 重置密码 */
+  const resetPwd = (params: string) => {
+    resetPwdProxyOfList(params)
+      .then((result) => {
+        message.success(result.msg);
+        /** 刷新表格 */
+        setIsRefreshTable((state) => !state);
+      })
+      .catch((err) => {
+        message.error(err);
+      });
+  };
+
+  function getItems(record: ProxyOfListAPI.Datum): MenuProps['items'] {
+    const items: MenuProps['items'] = [
+      {
+        key: '1',
+        label: (
+          <Link to={`/agent/edit/update?${qs.stringify(record)}`}>
+            <div>修改</div>
+          </Link>
+        ),
+      },
+      {
+        key: '2',
+        label: (
+          <div
+            onClick={() =>
+              changeStatus({ status: record.status, agentNo: record.agentNo })
+            }
+          >
+            启用
+          </div>
+        ),
+        disabled: record.status === 1,
+      },
+      {
+        key: '3',
+        label: (
+          <div
+            onClick={() =>
+              changeStatus({ status: record.status, agentNo: record.agentNo })
+            }
+          >
+            禁用
+          </div>
+        ),
+        disabled: record.status === 0,
+      },
+      {
+        key: '4',
+        label: <div onClick={() => resetPwd(record.agentNo)}>重置密码</div>,
+      },
+    ];
+    return items;
+  }
+
+  /* -------------------------------------------------------------------------- */
+
+  /** 列表用户信息（一条） */
+  const [proxyOfListUser, setProxyOfListUser] = useState<
+    Partial<ProxyOfListAPI.Datum>
+  >({});
+
   /** 查询表单实例 */
   const [form] = Form.useForm();
 
   const onSearch = (values: ProxyOfListAPI.searchProxyOfListParams) => {
-    console.log('Search params:', values);
     // 这里添加搜索逻辑
-
     searchProxyOfList({
       ...values,
       current: paginationConfig.current,
@@ -87,6 +171,7 @@ const ProxyOfList = () => {
     totalPages?: number;
   }
 
+  /** 分页器状态管理 */
   const [paginationConfig, setPaginationConfig] =
     useState<paginationConfigType>({
       current: 1,
@@ -188,11 +273,28 @@ const ProxyOfList = () => {
     },
     {
       title: '操作',
+      align: 'center',
       key: 'action',
-      render: (_, record) => '操作列',
+      render: (_, record) => (
+        <>
+          <div className="flex justify-center w-full gap-2">
+            <Tooltip title="操作人">
+              <UserOutlined className=" text-[20px] cursor-pointer  text-[#1677ff]" />
+            </Tooltip>
+            <Dropdown
+              menu={{ items: getItems(record) }}
+              placement="bottomLeft"
+              arrow
+            >
+              <Button>···</Button>
+            </Dropdown>
+          </div>
+        </>
+      ),
     },
   ];
 
+  /** 表格数据 */
   const [data, setData] = useState<ProxyOfListAPI.Datum[]>([]);
 
   return (
@@ -270,7 +372,7 @@ const ProxyOfList = () => {
           style={{ borderColor: '#393939', marginBlockEnd: 0 }}
         ></Divider>
 
-        <div className="flex h-[70px] items-center border justify-between w-full ">
+        <div className="flex h-[70px] items-center  justify-between w-full ">
           <Link to={'/addProxy'}>
             <Button size="large" type="primary">
               添加代理

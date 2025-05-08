@@ -9,6 +9,7 @@ export const setUserInfo = (userInfo: API.UserProfile) => {
   };
 };
 
+/** 异步获取用户信息 */
 export const fetchUserInfo = () => {
   return async function (dispatch: AppDispatch) {
     const result = await getUserInfo();

@@ -245,6 +245,12 @@ export default defineConfig({
       component: '@/pages/AddProxy',
       hideInMenu: true,
     },
+    {
+      name: '修改代理',
+      path: '/agent/edit/update/*',
+      component: '@/pages/User/Agent/Edit/UpdateEdit',
+      hideInMenu: true,
+    },
 
     {
       name: '登录页',
