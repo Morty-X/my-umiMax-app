@@ -4,8 +4,9 @@ import {
   updateProxyOfListUser,
 } from '@/services/user/ProxyOfList/api';
 import { formatDateTime } from '@/utils/format';
-import { ReloadOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
+import { Icon } from '@iconify/react';
 import { Link, useRequest } from '@umijs/max';
 import type { MenuProps, TableProps } from 'antd';
 import {
@@ -380,9 +381,12 @@ const ProxyOfList = () => {
           </Link>
           <div
             onClick={() => setIsRefreshTable((prev) => !prev)}
-            className="w-[40px] flex h-[40px] border rounded-md  cursor-pointer justify-center items-center border-[#000] "
+            className="w-[40px] flex h-[40px]  shadow-[0_0.2em_0_0.1em_#3f3f3f] hover:shadow-[0_0_0_0_#3f3f3f]  rotate-x-2 transition-all border rounded-md  cursor-pointer justify-center items-center border-[#000] "
           >
-            <ReloadOutlined className=" text-[30px]" />
+            <Icon
+              icon="ion:reload-outline"
+              className=" text-[30px] text-[#2a86ff]"
+            />
           </div>
         </div>
 
