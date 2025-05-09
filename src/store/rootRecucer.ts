@@ -2,7 +2,7 @@
 // import { userReducer } from './modules/user/reducer';
 // import { combineReducers } from "redux";
 import { persistCombineReducers } from 'redux-persist';
-import { countReducer } from './modules/count/reducer';
+import { proxyOfListReducer } from './modules/proxyOfList/reducer';
 import { userReducer } from './modules/user/reducer';
 // import sessionStorage from "redux-persist/es/storage/session";
 import localStorage from 'redux-persist/es/storage';
@@ -34,8 +34,7 @@ export const rootReducer = persistCombineReducers(
   },
   {
     user: userReducer,
-    count: countReducer,
-    // issues: issuesReducer,
+    proxyOfList: proxyOfListReducer,
     // auth: authReducer,
   },
 );
