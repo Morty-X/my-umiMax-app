@@ -47,21 +47,42 @@ export default defineConfig({
       name: '用户管理',
       path: '/user',
       icon: 'ContactsTwoTone',
-      component: '@/pages/User/ProxyOfList',
       // 配置子路由
       routes: [
         {
           name: '代理列表',
           path: '/user/agents',
           component: '@/pages/User/ProxyOfList',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
         {
           name: '管理员列表',
-          path: '/user/admins',
+          path: '/user/admins/*',
+          component: '@/pages/User/AdminsList',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
+        },
+        {
+          name: '修改管理员',
+          path: '/user/edit/update/*',
+          component: '@/pages/User/UpdateAdmin',
+          hideInMenu: true,
+        },
+        {
+          name: '新增管理员',
+          path: '/user/edit/add',
+          component: '@/pages/User/Edit/AddAdmin',
+          hideInMenu: true,
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
         {
           name: '用户列表',
           path: '/user/users',
+          component: '@/pages/User/UsersList',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
       ],
     },

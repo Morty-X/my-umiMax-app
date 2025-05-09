@@ -25,6 +25,7 @@ import {
 import { clsx } from 'clsx';
 import qs from 'qs';
 import { useEffect, useState } from 'react';
+
 type TableRowSelection<T extends object = object> =
   TableProps<T>['rowSelection'];
 
@@ -280,7 +281,9 @@ const ProxyOfList = () => {
         <>
           <div className="flex justify-center w-full gap-2">
             <Tooltip title="操作人">
-              <UserOutlined className=" text-[20px] cursor-pointer  text-[#1677ff]" />
+              <Link to={`/user/admins?adminNo=${record.updatedBy}`}>
+                <UserOutlined className=" text-[20px] cursor-pointer  text-[#1677ff]" />
+              </Link>
             </Tooltip>
             <Dropdown
               menu={{ items: getItems(record) }}
@@ -310,6 +313,7 @@ const ProxyOfList = () => {
           form={form}
           layout="inline"
           onFinish={onSearch}
+          initialValues={{ status: null }}
           autoComplete="off"
           size="large"
           style={{ gap: 4 }}
@@ -340,7 +344,7 @@ const ProxyOfList = () => {
               placeholder="状态"
               style={{ width: 190 }}
               options={[
-                { value: '', label: '状态：全部' },
+                { value: null, label: '状态：全部' },
                 { value: 1, label: '状态：启用' },
                 { value: 0, label: '状态：禁用' },
               ]}
@@ -369,8 +373,10 @@ const ProxyOfList = () => {
             </Row>
           </Form.Item>
         </Form>
+
+        {/* 分割线 */}
         <Divider
-          style={{ borderColor: '#393939', marginBlockEnd: 0 }}
+          style={{ borderColor: '#e8e8e8', marginBlockEnd: 0, height: 2 }}
         ></Divider>
 
         <div className="flex h-[70px] items-center  justify-between w-full ">
