@@ -97,6 +97,9 @@ export default defineConfig({
         {
           name: '订单列表',
           path: '/order/orders',
+          component: '@/pages/Order/OrderLit',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
         {
           name: '资金走向列表',

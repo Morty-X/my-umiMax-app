@@ -12,7 +12,7 @@ const UpdateAgent = () => {
   const [form] = Form.useForm();
 
   const location = useLocation();
-  
+
   const queryParamsObj: Partial<ProxyOfListAPI.Datum> = qs.parse(
     location.search.replace('?', ''),
   );
@@ -93,15 +93,7 @@ const UpdateAgent = () => {
           </Form.Item>
 
           <Form.Item style={{ marginTop: 20 }}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{
-                backgroundColor: '#7265e6',
-                borderColor: '#7265e6',
-                height: 40,
-              }}
-            >
+            <Button type="primary" htmlType="submit">
               提交保存
             </Button>
           </Form.Item>
