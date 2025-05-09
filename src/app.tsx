@@ -1,4 +1,5 @@
 import { persistor, store } from '@/store';
+import { ConfigProvider } from 'antd';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Profile from './components/Profile/Profile';
@@ -15,9 +16,8 @@ export const layout = () => {
   return {
     layout: 'mix',
     contentWidth: 'Fluid',
-    primaryColor: '#1890ff',
     title: '一秒快送后台管理系统',
-    
+
     logo: (
       <>
         <svg
@@ -46,9 +46,25 @@ export const layout = () => {
 export function rootContainer(container: JSX.Element) {
   return (
     <>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>{container}</PersistGate>
-      </Provider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#955ce6',
+          },
+          components: {
+            Table: {
+              borderColor: '#e8e8e8',
+              rowHoverBg: '#f9f0ff',
+              rowSelectedBg: '#fafafa',
+              rowSelectedHoverBg: '#fafafa',
+            },
+          },
+        }}
+      >
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>{container}</PersistGate>
+        </Provider>
+      </ConfigProvider>
     </>
   );
 }

@@ -238,7 +238,7 @@ const AdminsList = () => {
       key: 'action',
       render: (_, record) => (
         <>
-          <div className="flex justify-center w-full gap-2">
+          <div className="flex items-center justify-center w-full gap-2">
             <Tooltip title="操作人">
               <Link to={`/user/admins?adminNo=${record.updatedBy}`}>
                 <UserOutlined className=" text-[20px] cursor-pointer  text-[#1677ff]" />
@@ -452,15 +452,7 @@ const AdminsList = () => {
                 <Button onClick={onReset}>取消</Button>
               </Col>
               <Col>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#7265e6',
-                    borderColor: '#7265e6',
-                    color: '#fff',
-                  }}
-                >
+                <Button type="primary" htmlType="submit">
                   搜索
                 </Button>
               </Col>

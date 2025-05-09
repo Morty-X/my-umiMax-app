@@ -364,15 +364,7 @@ const UsersList = () => {
                   <Button onClick={onReset}>取消</Button>
                 </Col>
                 <Col>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    style={{
-                      backgroundColor: '#7265e6',
-                      borderColor: '#7265e6',
-                      color: '#fff',
-                    }}
-                  >
+                  <Button type="primary" htmlType="submit">
                     搜索
                   </Button>
                 </Col>
