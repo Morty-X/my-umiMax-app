@@ -30,7 +30,10 @@ export default defineConfig({
     dataField: '',
   },
 
-  layout: {},
+  layout: {
+    /** 在面包屑中隐藏 */
+    hideInBreadcrumb: true,
+  },
   routes: [
     /** 数据总览 */
     {
@@ -135,10 +138,16 @@ export default defineConfig({
         {
           name: '骑手列表',
           path: '/rider/riders',
+          component: '@/pages/Rider/RiderList',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
         {
           name: '骑手审核列表',
           path: 'rider/registers',
+          component: '@/pages/Rider/RiderVerify',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
       ],
     },

@@ -59,7 +59,7 @@ const NumberInput = ({ field }: { field: FormListFieldData }) => {
   return (
     <Form.Item
       {...restField}
-      name={[field.name, Date.now()]}
+      name={[field.name]}
       rules={[
         {
           required: true,
