@@ -64,7 +64,7 @@ function TableInOrderStatus({ status }: TableInOrderStatusProps) {
           className={clsx(
             'w-[60px] h-[28px] border rounded text-center leading-[28px] bg-[#aaaaaa] text-[#fff]',
             {
-              'bg-[#514f51]': status === -1,
+              'bg-[#0b0b0b]': status === -1,
             },
           )}
         >
