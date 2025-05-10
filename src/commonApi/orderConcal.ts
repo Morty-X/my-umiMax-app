@@ -7,6 +7,13 @@ export const getOrderCancelState = () => {
   });
 };
 
+/** 提交保存更新配置的方法 */
+export const updateOrderCancelConfig = (params: IOrderStatusData) => {
+  return request<common_API_Res_Type>('/api/admin/config/ordercancel', {
+    method: 'POST',
+    data: params,
+  });
+};
 interface IOrderStatusResType {
   code: number;
   msg: string;

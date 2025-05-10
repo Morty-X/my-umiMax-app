@@ -111,6 +111,9 @@ export default defineConfig({
         {
           name: '取消订单配置',
           path: '/order/cancelset',
+          component: '@/pages/Order/CancelOrder',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
         {
           name: '小费选择配置',
