@@ -62,9 +62,9 @@ function TableInOrderStatus({ status }: TableInOrderStatusProps) {
       <div className="flex items-center justify-center w-full h-full ">
         <div
           className={clsx(
-            'w-[60px] h-[28px] border rounded text-center leading-[28px] bg-[#aaaaaa] text-[#fff]',
+            'w-[60px] h-[28px] border rounded text-center leading-[28px]  bg-[#0b0b0b] text-[#fff]',
             {
-              'bg-[#0b0b0b]': status === -1,
+              'bg-[#aaaaaa]': status !== -1,
             },
           )}
         >
@@ -275,7 +275,7 @@ const OrderList: FC = () => {
       width: 80,
       key: 'status',
       render: (text, row, index) => {
-        return <TableInOrderStatus status={text} />;
+        return <TableInOrderStatus status={row.status} />;
       },
     },
     {
