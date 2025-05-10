@@ -118,6 +118,9 @@ export default defineConfig({
         {
           name: '小费选择配置',
           path: 'order/feeset',
+          component: '@/pages/Order/FeeChoiceConfig',
+          /** 在面包屑中隐藏 */
+          hideInBreadcrumb: true,
         },
       ],
     },
